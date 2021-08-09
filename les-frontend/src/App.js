@@ -1,10 +1,9 @@
-import './App.css';
+import "./App.css";
+import Rotas from "./rotas.js";
 
 function App() {
   return (
-    <div >
-      <h1>Projeto iniciado</h1>
-    </div>
+    <Rotas />
   );
 }
 
