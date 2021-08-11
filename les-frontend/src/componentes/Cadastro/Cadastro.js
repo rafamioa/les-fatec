@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { estados } from "./estados.js";
 
 export default class Cadastro extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -12,21 +12,52 @@ export default class Cadastro extends Component {
       dataDeNascimento: "",
       senha: "",
       genero: "masculino",
+      cep: "",
+      bairro: "",
+      logradouro: "",
+      numero: "",
+      cidade: "",
+      estado: "",
+      tipoDeEndereco: "",
+      enderecos: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+  }
+
+  async handleBlur(e) {
+    const cep = this.state.cep;
+    const { bairro, logradouro, localidade, uf } = await fetch(
+      `https://viacep.com.br/ws/${cep}/json/`
+    ).then((response) => response.json().catch((erro) => console.lgo(erro)));
+    this.setState({
+      bairro,
+      logradouro,
+      estado: uf,
+      cidade:localidade
+    });
   }
 
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({
-       [name]: value
+      [name]: value,
     });
-    console.log(e.target.name, e.target.value)
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    const endereco = {
+      logradouro: this.state.logradouro,
+      estado: this.state.estado,
+      numero: this.state.numero,
+    };
+    const enderecos = this.state.enderecos;
+    enderecos.push(endereco);
+    this.setState({
+      enderecos: [...enderecos],
+    });
     console.log(this.state);
   }
 
@@ -143,6 +174,112 @@ export default class Cadastro extends Component {
                 />
               </div>
             </div>
+            <h2 className="my-5 text-center">Endereço</h2>
+            <div className="row">
+              <div className="form-group col-md-6">
+                <label htmlFor="cep">CEP</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="00000-00"
+                  name="cep"
+                  value={this.state.cep}
+                  onChange={this.handleChange}
+                  onBlur={this.handleBlur}
+                />
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="numero">Número</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="10"
+                  name="numero"
+                  value={this.state.numero}
+                  onChange={this.handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="form-group col-md-6">
+                <label htmlFor="logradouro">Logradouro</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Dr. Washington da Silva"
+                  name="logradouro"
+                  value={this.state.logradouro}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="numero">Bairro</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Vl. Aparecida"
+                  name="bairro"
+                  value={this.state.bairro}
+                  onChange={this.handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="form-group col-md-6">
+                <label htmlFor="cidade">Cidade</label>
+                <input
+                  type="text"
+                  name="cidade"
+                  className="form-control"
+                  placeholder="Mogi das Cruzes"
+                  value={this.state.cidade}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="estado">Estado</label>
+                <select
+                  name="estado"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={this.state.estado}
+                >
+                  {estados.map((estado, index) => (
+                    <option value="apartamento" key={index}
+                    selected={this.state.estado === estado}>
+                      {estado}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="row">
+              <div className="form-group col-md-6">
+                <label htmlFor="tipo_de_endereco">Tipo de endereço</label>
+                <select
+                  name="tipoDeEndereco"
+                  className="form-control"
+                  onChange={this.handleChange}
+                  value={this.state.tipoDeEndereco}
+                >
+                  <option value="apartamento">Apartamento</option>
+                  <option value="casa">Casa</option>
+                </select>
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="observacoes">Observação</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="observacoes"
+                  value={this.state.observacao}
+                  onChange={this.handleChange}
+                />
+              </div>
+            </div>
+
             <div className="row">
               <div className="form-group col-md-6">
                 <button
