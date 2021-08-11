@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 export default class Cadastro extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +20,7 @@ export default class Cadastro extends Component {
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({
-      cliente: { [name]: value },
+       [name]: value
     });
   }
 
