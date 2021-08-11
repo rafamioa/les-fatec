@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 
 export default class Cadastro extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
-        nome: "",
-        email: "",
-        cpf: "",
-        telefone: "",
-        dataDeNascimento: "",
-        senha:"",
-        genero: ""
-      },
+      nome: "",
+      email: "",
+      cpf: "",
+      telefone: "",
+      dataDeNascimento: "",
+      senha: "",
+      genero: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -44,7 +44,7 @@ export default class Cadastro extends Component {
                 placeholder="Nome completo"
                 name="nome"
                 id="nome"
-                value={nome}
+                value={this.state.nome}
                 onChange={this.handleChange}
               />
             </div>
@@ -58,7 +58,7 @@ export default class Cadastro extends Component {
                   name="cpf"
                   placeholder="cpf: 000.000.000-00"
                   id="cpf"
-                  value={cpf}
+                  value={this.state.cpf}
                   onChange={this.handleChange}
                 />
               </div>
@@ -71,7 +71,7 @@ export default class Cadastro extends Component {
                   name="dataDeNascimento"
                   placeholder="01/01/2000"
                   id="data_de_nascimento"
-                  value={dataDeNascimento}
+                  value={this.state.dataDeNascimento}
                   onChange={this.handleChange}
                 />
               </div>
@@ -85,7 +85,7 @@ export default class Cadastro extends Component {
                     className="form-check-input"
                     type="radio"
                     name="genero"
-                    value="masculino"
+                    value={this.state.genero}
                     checked
                     onChange={this.handleChange}
                   />
@@ -96,8 +96,7 @@ export default class Cadastro extends Component {
                     className="form-check-input"
                     type="radio"
                     name="genero"
-                    value="feminino"
-
+                    value={this.state.genero}
                     onChange={this.handleChange}
                   />
                   <label className="form-check-label">feminino</label>
@@ -111,7 +110,7 @@ export default class Cadastro extends Component {
                   name="telefone"
                   placeholder="(11) 1111-1111"
                   id="telefone"
-                  value={telefone}
+                  value={this.state.telefone}
                   onChange={this.handleChange}
                 />
               </div>
@@ -125,7 +124,7 @@ export default class Cadastro extends Component {
                   name="email"
                   id="email"
                   placeholder="Digite um email"
-                  value={email}
+                  value={this.state.email}
                   onChange={this.handleChange}
                 />
               </div>
@@ -137,7 +136,7 @@ export default class Cadastro extends Component {
                   name="senha"
                   id="senha"
                   placeholder="Digite uma senha"
-                  value={senha}
+                  value={this.state.senha}
                   onChange={this.handleChange}
                 />
               </div>
