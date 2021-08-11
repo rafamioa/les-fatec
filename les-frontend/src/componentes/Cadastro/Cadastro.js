@@ -11,7 +11,7 @@ export default class Cadastro extends Component {
       telefone: "",
       dataDeNascimento: "",
       senha: "",
-      genero: "",
+      genero: "masculino",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -22,6 +22,7 @@ export default class Cadastro extends Component {
     this.setState({
        [name]: value
     });
+    console.log(e.target.name, e.target.value)
   }
 
   handleSubmit(e) {
@@ -85,8 +86,8 @@ export default class Cadastro extends Component {
                     className="form-check-input"
                     type="radio"
                     name="genero"
-                    value={this.state.genero}
-                    checked
+                    value="masculino"
+                    checked={this.state.genero === "masculino"}
                     onChange={this.handleChange}
                   />
                   <label className="form-check-label">masculino</label>
@@ -96,7 +97,8 @@ export default class Cadastro extends Component {
                     className="form-check-input"
                     type="radio"
                     name="genero"
-                    value={this.state.genero}
+                    value="feminino"
+                    checked={this.state.genero === "feminino"}
                     onChange={this.handleChange}
                   />
                   <label className="form-check-label">feminino</label>
