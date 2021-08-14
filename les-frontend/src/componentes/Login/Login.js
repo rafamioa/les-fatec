@@ -1,9 +1,19 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
 
-export default class Login extends Component {
-  render() {
-    return (
+const Login = () => {
+  const navegacao = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("login");
+    navegacao("/conta/pedidos");
+  }
+
+  return (
+    <>
+    <Navbar links={null} />
       <div className="container mt-5">
         <div className="offset-md-4 col-md-4">
           <h1 className="text-center">
@@ -11,7 +21,7 @@ export default class Login extends Component {
           </h1>
 
           <div className="dropdown-divider my-4"></div>
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className="input-group">
               <div className="input-group-prepend">
                 <div className="input-group-text">
@@ -29,7 +39,7 @@ export default class Login extends Component {
             <div className="input-group mt-3">
               <div className="input-group-prepend">
                 <div className="input-group-text">
-                  <i className="fa fa-unlock-alt" />
+                  <i className="fa fa-lock" />
                 </div>
               </div>
               <input
@@ -60,6 +70,7 @@ export default class Login extends Component {
           </form>
         </div>
       </div>
-    );
-  }
-}
+    </>
+  );
+};
+export default Login;

@@ -3,28 +3,28 @@ import { Link } from "react-router-dom";
 import "./style.css";
 import logo from "./logo.png";
 
-export default class Navbar extends Component {
-  render() {
-    return (
-      <nav className="navbar navbar-expand-lg navbar-light border shadow-sm bg-light">
-        <div className="container">
-          <Link to={"/"} className="navbar-brand">
-            <img src={logo} alt="Logo do site" className="logo" />
-          </Link>
-          <ul className="navbar-nav ml-auto">
+const Navbar = ({ links }) => {
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light border shadow-sm bg-light">
+      <div className="container">
+        <Link to={"/"} className="navbar-brand">
+          <img src={logo} alt="Logo do site" className="logo" />
+        </Link>
+        {links &&
+        <ul className="navbar-nav ml-auto">
+
+          {links.map((link) =>(
             <li className="nav-item">
-              <Link className="cor-1 nav-link" to={"/cadastro"}>
-                Cadastre-se
+              <Link className="cor-1 nav-link" to={link.to}>
+                {link.link}
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="cor-1 nav-link" to={"/login"}>
-                Login
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    );
-  }
-}
+          ))}
+        </ul>
+        }
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
