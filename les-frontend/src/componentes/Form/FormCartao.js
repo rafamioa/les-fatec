@@ -7,7 +7,7 @@ const FormCartao = () => {
     <>
       <div className="row">
         <div className="form-group col-md-6">
-          <label forHtml="nomeDoCartao">Nome impresso no cartão</label>
+          <label forHtml="nomeDoCartao"><span className="text-danger mr-1">*</span>Nome impresso no cartão</label>
           <input
             type="text"
             name="nomeDoCartao"
@@ -16,7 +16,7 @@ const FormCartao = () => {
           />
         </div>
         <div className="form-group col-md-6">
-          <label forHtml="numeroDoCartao">Número do cartão</label>
+          <label forHtml="numeroDoCartao"><span className="text-danger mr-1">*</span>Número do cartão</label>
           <input
             type="text"
             name="numeroDoCartao"
@@ -27,7 +27,7 @@ const FormCartao = () => {
       </div>
       <div className="row ">
         <div className="form-group col-md-6">
-          <label forHtml="codigoDoCartao">Código de segurança</label>
+          <label forHtml="codigoDoCartao"><span className="text-danger mr-1">*</span>Código de segurança</label>
           <input
             type="text"
             name="codigoDoCartao"
@@ -36,7 +36,7 @@ const FormCartao = () => {
           />
         </div>
         <div className="form-group col-md-6">
-          <label htmlFor="bandeiraDoCartao">Bandeira do cartão</label>
+          <label htmlFor="bandeiraDoCartao"><span className="text-danger mr-1">*</span>Bandeira do cartão</label>
           <select
             name="bandeiraDoCartao"
             className="form-control"

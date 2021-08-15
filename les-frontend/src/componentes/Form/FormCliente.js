@@ -6,7 +6,7 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
   return (
     <>
       <div className="form-group">
-        <label htmlFor="nome">Nome completo</label>
+        <label htmlFor="nome"><span className="text-danger mr-1">*</span>Nome completo</label>
         <input
           type="text"
           className="form-control"
@@ -20,7 +20,7 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
 
       <div className="row">
         <div className="form-group col-md-6">
-          <label htmlFor="cpf">CPF</label>
+          <label htmlFor="cpf"><span className="text-danger mr-1">*</span>CPF</label>
           <input
             type="text"
             className="form-control"
@@ -33,7 +33,7 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
         </div>
 
         <div className="form-group col-md-6">
-          <label htmlFor="data_de_nascimento">Data de Nascimento</label>
+          <label htmlFor="data_de_nascimento"><span className="text-danger mr-1">*</span>Data de Nascimento</label>
           <input
             type="text"
             className="form-control"
@@ -47,7 +47,7 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
       </div>
       <div className="row">
         <div className="form-group col-md-6">
-          <label htmlFor="genero">Gênero</label>
+          <label htmlFor="genero"><span className="text-danger mr-1">*</span>Gênero</label>
           <br />
           <div className="form-check form-check-inline">
             <input
@@ -73,7 +73,7 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
           </div>
         </div>
         <div className="form-group col-md-6">
-          <label htmlFor="teleone">Telefone</label>
+          <label htmlFor="teleone"><span className="text-danger mr-1">*</span>Telefone</label>
           <input
             type="text"
             className="form-control"
@@ -87,7 +87,7 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
       </div>
       <div className="row">
         <div className="form-group col-md-6">
-          <label htmlFor="email">E-mail</label>
+          <label htmlFor="email"><span className="text-danger mr-1">*</span>E-mail</label>
           <input
             type="email"
             className="form-control"
@@ -99,7 +99,7 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
           />
         </div>
         <div className="form-group col-md-6">
-          <label htmlFor="senha">Senha</label>
+          <label htmlFor="senha"><span className="text-danger mr-1">*</span>Senha</label>
           <input
             type="password"
             className="form-control"

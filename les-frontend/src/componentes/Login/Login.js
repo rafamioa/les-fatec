@@ -56,7 +56,7 @@ const Login = () => {
                 className="form-control btn btn-secondary border border-dark"
                 id="login"
               >
-                Logar
+                Entrar
               </button>
             </div>
             <div className="form-group">
