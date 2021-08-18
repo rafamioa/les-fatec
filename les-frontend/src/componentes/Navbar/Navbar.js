@@ -14,7 +14,7 @@ const Navbar = ({ links }) => {
         <ul className="navbar-nav ml-auto">
 
           {links.map((link) =>(
-            <li className="nav-item">
+            <li className="nav-item" key={link.link}>
               <Link className="cor-1 nav-link" to={link.to}>
                 {link.link}
               </Link>

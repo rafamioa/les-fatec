@@ -1,7 +1,7 @@
 import React from "react";
 import { estados } from "../../dados/estados.js";
 
-const FormCliente = ({cliente, setCliente, handleChange}) => {
+const FormCliente = () => {
 
   return (
     <>
@@ -13,8 +13,8 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
           placeholder="Nome completo"
           name="nome"
           id="nome"
-          value={cliente.nome}
-          onChange={handleChange}
+
+
         />
       </div>
 
@@ -27,8 +27,8 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
             name="cpf"
             placeholder="cpf: 000.000.000-00"
             id="cpf"
-            value={cliente.cpf}
-            onChange={handleChange}
+
+
           />
         </div>
 
@@ -40,8 +40,8 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
             name="dataDeNascimento"
             placeholder="01/01/2000"
             id="data_de_nascimento"
-            value={cliente.dataDeNascimento}
-            onChange={handleChange}
+
+
           />
         </div>
       </div>
@@ -55,8 +55,8 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
               type="radio"
               name="genero"
               value="masculino"
-              checked={cliente.genero === "masculino"}
-              onChange={handleChange}
+
+
             />
             <label className="form-check-label">masculino</label>
           </div>
@@ -66,8 +66,7 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
               type="radio"
               name="genero"
               value="feminino"
-              checked={cliente.genero === "feminino"}
-              onChange={handleChange}
+
             />
             <label className="form-check-label">feminino</label>
           </div>
@@ -80,8 +79,8 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
             name="telefone"
             placeholder="(11) 1111-1111"
             id="telefone"
-            value={cliente.telefone}
-            onChange={handleChange}
+
+
           />
         </div>
       </div>
@@ -94,8 +93,8 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
             name="email"
             id="email"
             placeholder="Digite um email"
-            value={cliente.email}
-            onChange={handleChange}
+
+
           />
         </div>
         <div className="form-group col-md-6">
@@ -106,8 +105,8 @@ const FormCliente = ({cliente, setCliente, handleChange}) => {
             name="senha"
             id="senha"
             placeholder="Digite uma senha"
-            value={cliente.senha}
-            onChange={handleChange}
+
+
           />
         </div>
       </div>
