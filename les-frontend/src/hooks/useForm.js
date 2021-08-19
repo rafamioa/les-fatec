@@ -1,10 +1,7 @@
 import React from 'react';
+import {mask, unMask} from "remask";
 
 const types = {
-  cep: {
-    regex: /^\d{5}-?\d{3}$/,
-    message: 'Cep inválido',
-  },
   email: {
     regex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     message: 'Email inválido',
@@ -15,21 +12,48 @@ const types = {
   },
   cpf: {
     regex: /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/,
-    message: "CPF inválido"
+    message: "CPF inválido",
+    mask: ["999.999.999-99"]
   },
   dataDeNascimento: {
-    regex: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
-    message: "Data inválida"
+    regex: /^(0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{4}$/,
+    message: "Data inválida",
+    mask: "99/99/9999"
   },
   telefone: {
     regex: /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/,
-    message: "Telefone inválido"
+    message: "Telefone inválido",
+    mask: ["(99) 9999-9999", "(99) 99999-9999"]
   },
   senha: {
     regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/,
     message: "Senha inválida"
   },
-
+  cep: {
+    regex: /^\d{5}-?\d{3}$/,
+    message: 'Cep inválido',
+    mask: ["99999-999"]
+  },
+  logradouro: {
+    regex: /^[a-zA-Z0-9\u00C0-\u00FF-. ]+$/,
+    message: "Logradouro inválido"
+  },
+  bairro:{
+    regex: /^[a-zA-Z\u00C0-\u00FF-. ]+$/,
+    message: "Bairro inválido"
+  },
+  cidade: {
+    regex: /^[a-zA-Z\u00C0-\u00FF-. ]+$/,
+    message: "Cidade inválida"
+  },
+  numero: {
+    regex: /^[0-9]+$/,
+    message: "Número inválido"
+  },
+  descricao: {
+    regex: /^[A-z0-9\W]+$/,
+    message: "Descrição inválida"
+  },
 };
 
 const useForm = (type) => {
@@ -51,8 +75,17 @@ const useForm = (type) => {
   }
 
   function onChange({ target }) {
-    if (error) validate(target.value);
-    setValue(target.value);
+    console.log(types.hasOwnProperty(type));
+    if (error) validate(target.value);   
+    const existe = types[type].mask;
+    if(existe) {
+      const valorOriginal = unMask(target.value);
+      const valorComMascara = mask(valorOriginal,types[type].mask)
+      setValue(valorComMascara);
+    }
+    else
+      setValue(target.value);
+    
   }
 
   return {

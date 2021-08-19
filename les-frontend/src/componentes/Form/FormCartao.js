@@ -1,7 +1,5 @@
 import React from "react";
 
-const CARTOES = ["Mastercard", "Visa", "Elo"];
-
 const FormCartao = () => {
   return (
     <>

@@ -1,6 +1,5 @@
 import React from "react";
 import Endereco from "./Endereco";
-import FormEndereco from "../Form/FormEndereco";
 import { Link } from "react-router-dom";
 
 const ENDERECOS = [

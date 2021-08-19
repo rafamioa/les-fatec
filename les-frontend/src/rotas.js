@@ -1,16 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import Navbar from "./componentes/Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./componentes/Footer/Footer";
 import Login from "./componentes/Login/Login";
 import Cadastro from "./componentes/Cadastro/Cadastro";
 import Conta from "./componentes/Conta/Conta";
 
-import DadosPessoais from "./componentes/Conta/DadosPessoais";
-import Cupons from "./componentes/Conta/Cupons";
-import Enderecos from "./componentes/Conta/Enderecos";
-import Pedidos from "./componentes/Conta/Pedidos";
-import Cartoes from "./componentes/Conta/Cartoes";
 import CartaoNovo from "./componentes/Conta/CartaoNovo";
 import CartaoEditar from "./componentes/Conta/CartaoEditar";
 import EnderecoNovo from "./componentes/Conta/EnderecoNovo";

@@ -8,6 +8,8 @@ import { estados } from "../../dados/estados";
 import { tiposLogradouro } from "../../dados/tiposLogradouro";
 import Mensagem from "../Mensagem/Mensagem";
 
+const TIPOS_DE_ENDERECO = ["apartamento", "casa", "comercial"];
+
 const Cadastro = () => {
   const [genero, setGenero] = useState("M");
   const [estado, setEstado] = useState("SP");
@@ -18,7 +20,7 @@ const Cadastro = () => {
   const enderecoDeCobranca = true;
   const [observacao, setObservacao] = useState("");
 
-  const [mensagem, setMensagem] = useState(false);
+  const [mensagem, setMensagem] = useState({tipo: "", status: false, mensagem:""});
 
   const navegacao = useNavigate();
   // Dados Pessoais
@@ -28,7 +30,7 @@ const Cadastro = () => {
   const telefone = useForm("telefone");
   const email = useForm("email");
   const senha = useForm("senha");
-  const repitaSenha = useForm("repitaSenha");
+  const repitaSenha = useForm("senha");
   // Dados de Endereço
   const cep = useForm("cep");
   const numero = useForm("numero");
@@ -80,12 +82,13 @@ const Cadastro = () => {
         enderecoDeEntrega,
         enderecoDeCobranca,
       });
+      setMensagem({status: true, tipo: "sucesso", mensagem: "Cadastrado com sucesso"});
       console.log(novoCliente);
+      // navegacao("/conta/pedidos");
     } else {
-      setMensagem(true);
+      setMensagem({status: true, tipo: "erro", mensagem: "Verifique se todos os dados estão corretos"});
       console.log("Não enviar");
-    }
-    // navegacao("/conta/pedidos");
+    }  
   }
 
   return (
@@ -93,10 +96,11 @@ const Cadastro = () => {
       <Navbar links={[{ link: "entrar", to: "/login" }]} />
       <div className="container mt-5">
         <div className="col-md-6 offset-md-3">
-          {mensagem && (
+          {mensagem.status && (
             <Mensagem
-              mensagem={"Preecha todos os campos obrigatórios"}
-              status={false}
+              mensagem={mensagem.mensagem}
+              status={mensagem.status}
+              tipo={mensagem.tipo}
             />
           )}
           <h1 className="text-center">Cadastre-se</h1>
@@ -196,7 +200,7 @@ const Cadastro = () => {
                   <span className="text-danger mr-1">*</span>
                   <Input
                     label="Senha"
-                    type="text"
+                    type="password"
                     placeholder="#seNha21"
                     {...senha}
                   />
@@ -207,7 +211,7 @@ const Cadastro = () => {
                   <span className="text-danger mr-1">*</span>
                   <Input
                     label="Repita a senha"
-                    type="text"
+                    type="password"
                     placeholder="#seNha21"
                     {...repitaSenha}
                   />
@@ -264,6 +268,7 @@ const Cadastro = () => {
                   <span className="text-danger mr-1">*</span>Tipo de logradouro
                 </label>
                 <select
+                  value={tipoLogradouro}
                   name="tipoLogradouro"
                   id="tipoLogradouro"
                   className="form-control"
@@ -273,7 +278,6 @@ const Cadastro = () => {
                     <option
                       value={tipo}
                       key={index}
-                      selected={tipoLogradouro === tipo}
                     >
                       {tipo}
                     </option>
@@ -285,13 +289,14 @@ const Cadastro = () => {
                   <span className="text-danger mr-1">*</span>Estado
                 </label>
                 <select
+                  value={estado}
                   name="estado"
                   id="estado"
                   className="form-control"
                   onChange={({ target }) => setEstado(target.value)}
                 >
                   {estados.map((e, index) => (
-                    <option value={e} key={index} selected={estado === e}>
+                    <option value={e} key={index} >
                       {e}
                     </option>
                   ))}
@@ -302,12 +307,13 @@ const Cadastro = () => {
                   <span className="text-danger mr-1">*</span>País
                 </label>
                 <select
+                  value={pais}
                   name="pais"
                   id="pais"
                   className="form-control"
                   onChange={({ target }) => setPais(target.value)}
                 >
-                  <option value="Brasil" selected={pais === "Brasil"}>
+                  <option value="Brasil" >
                     Brasil
                   </option>
                 </select>
@@ -320,26 +326,20 @@ const Cadastro = () => {
                   <span className="text-danger mr-1">*</span>Tipo de endereço
                 </label>
                 <select
+                  value={tipoDeEndereco}
                   name="tipoDeEndereco"
                   id="tipoDeEndereco"
                   className="form-control"
                   onChange={({ target }) => setTipoDeEndereco(target.value)}
                 >
-                  <option
-                    value="apartamento"
-                    selected={tipoDeEndereco === "apartamento"}
-                  >
-                    Apartamento
-                  </option>
-                  <option value="casa" selected={tipoDeEndereco === "casa"}>
-                    Casa
-                  </option>
-                  <option
-                    value="comercial"
-                    selected={tipoDeEndereco === "comercial"}
-                  >
-                    Comercial
-                  </option>
+                  {TIPOS_DE_ENDERECO.map((tipo, index) => (
+                    <option
+                      value={tipo}
+                      key={index}
+                    >
+                      {tipo}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="form-group col-md-6">

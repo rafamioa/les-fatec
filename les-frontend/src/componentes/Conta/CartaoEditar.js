@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 import FormCartao from "../Form/FormCartao";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
 const CartaoEditar = () => {

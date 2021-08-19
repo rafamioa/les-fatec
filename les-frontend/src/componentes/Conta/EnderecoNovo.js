@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 import FormEndereco from "../Form/FormEndereco";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
 const EnderecoNovo = () => {

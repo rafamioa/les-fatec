@@ -34,39 +34,38 @@ const EnderecoCard = ({ endereco }) => {
           </Link>
 
           <div
-            class="modal fade"
+            className="modal fade"
             id="staticBackdrop"
             data-backdrop="static"
             data-keyboard="false"
-            tabindex="-1"
             aria-labelledby="staticBackdropLabel"
             aria-hidden="true"
           >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="staticBackdropLabel">
                     Excluir endereço
                   </h5>
                   <button
                     type="button"
-                    class="close"
+                    className="close"
                     data-dismiss="modal"
                     aria-label="Close"
                   >
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">Tem certeza que deseja excluir?</div>
-                <div class="modal-footer">
+                <div className="modal-body">Tem certeza que deseja excluir?</div>
+                <div className="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-secondary"
+                    className="btn btn-secondary"
                     data-dismiss="modal"
                   >
                     Cancelar
                   </button>
-                  <button type="button" class="btn btn-secondary">
+                  <button type="button" className="btn btn-secondary">
                     Confirmar
                   </button>
                 </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import Cartao from "./Cartao";
-import { Link, Routes, Route } from "react-router-dom";
-import FormCartao from "../Form/FormCartao";
+import { Link } from "react-router-dom";
 
 const CARTOES = [
   {
@@ -13,7 +12,6 @@ const CARTOES = [
 ];
 
 const Cartoes = () => {
-  const [novoCartao, setNovoCartao] = React.useState(false);
 
   return (
     <>
