@@ -50,29 +50,16 @@ const Login = () => {
 
           <div className="dropdown-divider my-4"></div>
           <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <div className="input-group-text">
-                  <i className="fa fa-envelope" />
-                </div>
-              </div>
+            <div className="form-group">
               <Input type="text" placeholder="E-mail" id="email" {...email} />
-            </div>
-            <div className="input-group mt-3">
-              <div className="input-group-prepend">
-                <div className="input-group-text">
-                  <i className="fa fa-lock" />
-                </div>
-              </div>
               <Input
                 type="password"
-                className="form-control"
                 placeholder="Senha"
                 id="senha"
                 {...senha}
               />
             </div>
-            <div className="form-group mt-3">
+            <div className="form-group">
               <button
                 type="submit"
                 className="form-control btn btn-secondary border border-dark"
