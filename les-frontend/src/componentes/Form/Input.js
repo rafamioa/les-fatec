@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Input = ({
   id,
@@ -7,8 +7,10 @@ const Input = ({
   value,
   type,
   onBlur,
+  onClick,
   placeholder,
   error,
+  campo,
 }) => {
   return (
     <>
@@ -17,13 +19,15 @@ const Input = ({
         id={id}
         name={id}
         onChange={onChange}
+        onClick={onClick}
         placeholder={placeholder}
         onBlur={onBlur}
         type={type}
         value={value}
         className="form-control"
+        campo={campo}
       />
-    {error && <small className="text-danger">{error}</small >}
+      {error && <small className="text-danger">{error}</small>}
     </>
   );
 };

@@ -10,6 +10,21 @@ import Navbar from "../Navbar/Navbar";
 import AlterarSenha from "./AlterarSenha";
 
 const Conta = (props) => {
+  const [cliente, setCliente] = React.useState({
+    nome: "João da Silva Carvalho",
+    email: "joão@email.com",
+    cpf: "111.222.333-44",
+    telefone: "(11) 4726-3078",
+    dataDeNascimento: "01/01/1980",
+    senha: "$fJda587#",
+    genero: "M",
+  });
+
+  // function onChange(e){
+  //   const {name, value} = e.target;
+  //   setCliente({...cliente, name: value});
+  //   console.log(cliente);
+  // }
 
   return (
     <>
@@ -17,12 +32,15 @@ const Conta = (props) => {
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-3">
-            <Sidebar />
+            <Sidebar cliente={cliente} />
           </div>
           <div className="col-md-9 ">
             <Routes>
               <Route path="pedidos" element={<Pedidos />} />
-              <Route path="dados" element={<DadosPessoais />} />
+              <Route
+                path="dados"
+                element={<DadosPessoais cliente={cliente} />}
+              />
               <Route path="enderecos" element={<Enderecos />} />
               <Route path="cartoes" element={<Cartoes />} />
               <Route path="cupons" element={<Cupons />} />

@@ -15,7 +15,7 @@ const Cadastro = () => {
   const [estado, setEstado] = useState("SP");
   const [pais, setPais] = useState("Brasil");
   const [tipoDeEndereco, setTipoDeEndereco] = useState("comercial");
-  const [tipoLogradouro, setTipoLogradouro] = useState("rua");
+  const [tipoDeLogradouro, setTipoDeLogradouro] = useState("rua");
   const enderecoDeEntrega = true;
   const enderecoDeCobranca = true;
   const [observacao, setObservacao] = useState("");
@@ -78,7 +78,7 @@ const Cadastro = () => {
         pais,
         observacao,
         tipoDeEndereco,
-        tipoLogradouro,
+        tipoDeLogradouro,
         enderecoDeEntrega,
         enderecoDeCobranca,
       });
@@ -88,7 +88,7 @@ const Cadastro = () => {
     } else {
       setMensagem({status: true, tipo: "erro", mensagem: "Verifique se todos os dados estão corretos"});
       console.log("Não enviar");
-    }  
+    }
   }
 
   return (
@@ -268,11 +268,11 @@ const Cadastro = () => {
                   <span className="text-danger mr-1">*</span>Tipo de logradouro
                 </label>
                 <select
-                  value={tipoLogradouro}
-                  name="tipoLogradouro"
-                  id="tipoLogradouro"
+                  value={tipoDeLogradouro}
+                  name="tipoDeLogradouro"
+                  id="tipoDeLogradouro"
                   className="form-control"
-                  onChange={({ target }) => setTipoLogradouro(target.value)}
+                  onChange={({ target }) => setTipoDeLogradouro(target.value)}
                 >
                   {tiposLogradouro.map((tipo, index) => (
                     <option

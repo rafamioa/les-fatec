@@ -1,21 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import Input from "../Form/Input";
+import useForm from "../../hooks/useForm";
+import Mensagem from "../Mensagem/Mensagem";
 
 const Login = () => {
+  const [mensagem, setMensagem] = useState({
+    tipo: "",
+    status: false,
+    mensagem: "",
+  });
+
+  const email = useForm("email");
+  const senha = useForm("senha");
+
   const navegacao = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("login");
-    navegacao("/conta/pedidos");
+    if (email.validate() && senha.validate()) {
+      console.log("login");
+      navegacao("/conta/pedidos");
+    } else {
+      setMensagem({
+        status: true,
+        tipo: "erro",
+        mensagem: "Erro ao efetuar o login!!",
+      });
+      console.log("Erro de login");
+    }
   }
 
   return (
     <>
-    <Navbar links={null} />
+      <Navbar links={null} />
       <div className="container mt-5">
         <div className="offset-md-4 col-md-4">
+          {mensagem.status && (
+            <Mensagem
+              mensagem={mensagem.mensagem}
+              status={mensagem.status}
+              tipo={mensagem.tipo}
+            />
+          )}
           <h1 className="text-center">
             <i className="fa fa-user icone text-secondary"></i>
           </h1>
@@ -28,13 +56,7 @@ const Login = () => {
                   <i className="fa fa-envelope" />
                 </div>
               </div>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="E-mail"
-                name="email"
-                id="email"
-              />
+              <Input type="text" placeholder="E-mail" id="email" {...email} />
             </div>
             <div className="input-group mt-3">
               <div className="input-group-prepend">
@@ -42,12 +64,12 @@ const Login = () => {
                   <i className="fa fa-lock" />
                 </div>
               </div>
-              <input
+              <Input
                 type="password"
                 className="form-control"
                 placeholder="Senha"
-                name="senha"
                 id="senha"
+                {...senha}
               />
             </div>
             <div className="form-group mt-3">

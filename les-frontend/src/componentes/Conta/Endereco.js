@@ -18,7 +18,7 @@ const EnderecoCard = ({ endereco }) => {
             " - " +
             endereco.tipoDeEndereco +
             " - " +
-            endereco.cep}
+            endereco.cep }
         </div>
         <div className="col-md-4">
           <Link to="editar">
