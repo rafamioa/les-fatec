@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import useForm from "../../hooks/useForm";
 import { estados } from "../../dados/estados";
 import Mensagem from "../Mensagem/Mensagem";
@@ -47,7 +46,6 @@ const EnderecoNovo = () => {
 
   return (
     <>
-      <Navbar links={[{ link: "Sair", to: "/" }]} />
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-3">

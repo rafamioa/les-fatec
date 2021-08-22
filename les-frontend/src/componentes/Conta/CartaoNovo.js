@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import useForm from "../../hooks/useForm";
 import Mensagem from "../Mensagem/Mensagem";
 import Input from "../Form/Input";
@@ -24,7 +23,12 @@ const CartaoNovo = () => {
       numeroDoCartao.validate() &&
       codigoDoCartao.validate()
     ) {
-      navegacao("/conta/cartoes");
+      setMensagem({
+        status: true,
+        tipo: "sucesso",
+        mensagem: "Cartão cadastrado com suecesso",
+      });
+      // navegacao("/conta/cartoes");
     } else {
       setMensagem({
         status: true,
@@ -37,7 +41,6 @@ const CartaoNovo = () => {
 
   return (
     <>
-      <Navbar links={[{ link: "Sair", to: "/" }]} />
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-3">

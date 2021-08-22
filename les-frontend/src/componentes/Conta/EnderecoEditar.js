@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import useForm from "../../hooks/useForm";
 import { estados } from "../../dados/estados";
 import Mensagem from "../Mensagem/Mensagem";
@@ -9,6 +8,23 @@ import Input from "../Form/Input";
 import Textarea from "../Form/Textarea";
 
 const EnderecoEditar = () => {
+  const [endereco, setEndereco] = React.useState({
+    id: 1,
+    logradouro: "Rua Dr. Daniel da Costa Chaves",
+    bairro: "Vl. Sônia",
+    cidade: "Mogi das Cruzes",
+    estado: "SP",
+    pais: "Brasil",
+    numero: 20,
+    tipoDeEndereco: "Residencial",
+    tipoDeLogradouro: "rua",
+    cep: "08720-501",
+    observacao: "",
+    descricao: "Minha casa",
+    enderecoDeEntrega: true,
+    enderecoDeCobranca: true,
+  });
+
   const navegacao = useNavigate();
 
   const [mensagem, setMensagem] = useState({
@@ -35,12 +51,18 @@ const EnderecoEditar = () => {
       cidade.validate() &&
       descricao.validate()
     ) {
-      navegacao("/conta/enderecos");
+      // navegacao("/conta/enderecos");
+      setMensagem({
+        status: true,
+        tipo: "sucesso",
+        mensagem: "Alterações salvas com sucesso",
+      });
     } else {
       setMensagem({
         status: true,
         tipo: "erro",
-        mensagem: "Erro ao salvar as modificações. Verifique se os campos estão preenchidos corretamente",
+        mensagem:
+          "Erro ao salvar as modificações. Verifique se os campos estão preenchidos corretamente",
       });
       console.log("Não enviar");
     }
@@ -48,7 +70,6 @@ const EnderecoEditar = () => {
 
   return (
     <>
-      <Navbar links={[{ link: "Sair", to: "/" }]} />
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-3">
@@ -73,9 +94,9 @@ const EnderecoEditar = () => {
                   type="text"
                   className="form-control"
                   placeholder="00000-000"
-                  name="cep"
                   id="cep"
                   {...cep}
+                  campo={endereco.cep}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -89,6 +110,7 @@ const EnderecoEditar = () => {
                   name="numero"
                   id="numero"
                   {...numero}
+                  campo={endereco.numero}
                 />
               </div>
             </div>
@@ -105,6 +127,7 @@ const EnderecoEditar = () => {
                   name="logradouro"
                   id="logradouro"
                   {...logradouro}
+                  campo={endereco.logradouro}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -118,12 +141,13 @@ const EnderecoEditar = () => {
                   name="bairro"
                   id="bairro"
                   {...bairro}
+                  campo={endereco.bairro}
                 />
               </div>
             </div>
 
             <div className="row">
-              <div className="form-group col-md-6">
+              <div className="form-group col-md-4">
                 <label htmlFor="cidade">
                   <span className="text-danger mr-1">*</span>Cidade
                 </label>
@@ -134,6 +158,7 @@ const EnderecoEditar = () => {
                   placeholder="Mogi das Cruzes"
                   id="cidade"
                   {...cidade}
+                  campo={endereco.cidade}
                 />
               </div>
               <div className="form-group col-md-4">
@@ -154,7 +179,7 @@ const EnderecoEditar = () => {
                   ))}
                 </select>
               </div>
-              <div className="form-group col-md-3">
+              <div className="form-group col-md-4">
                 <label htmlFor="pais">
                   <span className="text-danger mr-1">*</span>País
                 </label>
@@ -198,6 +223,7 @@ const EnderecoEditar = () => {
                 id="descricao"
                 placeholder="Descrição curta para identificação"
                 {...descricao}
+                campo={endereco.descricao}
               />
             </div>
             <button onClick={handleClick} className="btn btn-secondary">

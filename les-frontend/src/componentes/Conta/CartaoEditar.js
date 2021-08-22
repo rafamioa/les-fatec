@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import useForm from "../../hooks/useForm";
 import Mensagem from "../Mensagem/Mensagem";
 import Input from "../Form/Input";
 
 const CartaoEditar = () => {
+  const [cartao, setCartao] = useState({
+    id: 1,
+    nomeDoCartao: "João da Silva",
+    numeroDoCartao: "1111 2222 3333 4444",
+    codigoDoCartao: "123",
+    bandeiraDoCartao: "Visa",
+  });
+
   const navegacao = useNavigate();
   const [mensagem, setMensagem] = useState({
     tipo: "",
@@ -24,7 +31,12 @@ const CartaoEditar = () => {
       numeroDoCartao.validate() &&
       codigoDoCartao.validate()
     ) {
-      navegacao("/conta/cartoes");
+      setMensagem({
+        status: true,
+        tipo: "sucesso",
+        mensagem: "Alterações salvas com sucesso",
+      });
+      // navegacao("/conta/cartoes");
     } else {
       setMensagem({
         status: true,
@@ -37,7 +49,6 @@ const CartaoEditar = () => {
 
   return (
     <>
-      <Navbar links={[{ link: "Sair", to: "/" }]} />
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-3">
@@ -61,10 +72,10 @@ const CartaoEditar = () => {
                 </label>
                 <Input
                   type="text"
-                  name="nomeDoCartao"
                   id="nomeDoCartao"
                   className="form-control"
                   {...nomeDoCartao}
+                  campo={cartao.nomeDoCartao}
                 />
               </div>
               <div className="form-group col-md-6">
@@ -77,6 +88,7 @@ const CartaoEditar = () => {
                   id="numeroDoCartao"
                   className="form-control"
                   {...numeroDoCartao}
+                  campo={cartao.numeroDoCartao}
                 />
               </div>
             </div>
@@ -91,6 +103,7 @@ const CartaoEditar = () => {
                   id="codigoDoCartao"
                   className="form-control"
                   {...codigoDoCartao}
+                  campo={cartao.codigoDoCartao}
                 />
               </div>
               <div className="form-group col-md-6">

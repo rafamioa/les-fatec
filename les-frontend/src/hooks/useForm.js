@@ -3,7 +3,8 @@ import { mask, unMask } from "remask";
 
 const types = {
   email: {
-    regex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    regex:
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     message: "Email inválido",
   },
   nome: {
@@ -77,13 +78,7 @@ const useForm = (type) => {
   React.useEffect(() => {
     if (document.getElementById(type)?.hasAttribute("campo")) {
       const campo = document.getElementById(type).getAttribute("campo");
-      if (types[type].mask) {
-        const campoSemMascara = unMask(campo);
-        setValue(unMask(campoSemMascara));
-        console.log(campoSemMascara);
-      }
       setValue(campo);
-      console.log(value);
     }
   }, []);
 
