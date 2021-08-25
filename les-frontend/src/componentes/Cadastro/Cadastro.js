@@ -7,6 +7,7 @@ import useForm from "../../hooks/useForm";
 import { estados } from "../../dados/estados";
 import { tiposLogradouro } from "../../dados/tiposLogradouro";
 import Mensagem from "../Mensagem/Mensagem";
+import axios from "axios";
 
 const TIPOS_DE_ENDERECO = ["apartamento", "casa", "comercial"];
 
@@ -20,7 +21,11 @@ const Cadastro = () => {
   const enderecoDeCobranca = true;
   const [observacao, setObservacao] = useState("");
 
-  const [mensagem, setMensagem] = useState({tipo: "", status: false, mensagem:""});
+  const [mensagem, setMensagem] = useState({
+    tipo: "",
+    status: false,
+    mensagem: "",
+  });
 
   const navegacao = useNavigate();
   // Dados Pessoais
@@ -39,39 +44,34 @@ const Cadastro = () => {
   const cidade = useForm("cidade");
   const descricao = useForm("descricao");
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    if (
-      nome.validate() &&
-      cpf.validate() &&
-      dataDeNascimento.validate() &&
-      telefone.validate() &&
-      email.validate() &&
-      senha.validate() &&
-      repitaSenha.validate() &&
-      senha.value === repitaSenha.value &&
-      cep.validate() &&
-      numero.validate() &&
-      logradouro.validate() &&
-      bairro.validate() &&
-      cidade.validate() &&
-      descricao.validate() &&
-      cep.validate()
-    ) {
+    // if (
+    //   nome.validate() &&
+    //   // cpf.validate() &&
+    //   // dataDeNascimento.validate() &&
+    //   // telefone.validate() &&
+    //   // email.validate() &&
+    //   // senha.validate() &&
+    //   // repitaSenha.validate() &&
+    //   // senha.value === repitaSenha.value &&
+    //   // cep.validate() &&
+    //   // numero.validate() &&
+    //   // logradouro.validate() &&
+    //   // bairro.validate() &&
+    //   // cidade.validate() &&
+    //   // descricao.validate() &&
+    //   // cep.validate()
+    // )
+    if (nome) {
       const cliente = Object.create(Object.prototype, {
         nome,
         cpf,
-        dataDeNascimento,
         telefone,
         email,
         senha,
-        cep,
-        logradouro,
-        bairro,
-        cidade,
-        numero,
-        descricao,
       });
+      const c = Object.assign(cliente, { genero: genero });
       const novoCliente = Object.assign(cliente, {
         genero: genero,
         estado,
@@ -82,11 +82,51 @@ const Cadastro = () => {
         enderecoDeEntrega,
         enderecoDeCobranca,
       });
-      setMensagem({status: true, tipo: "sucesso", mensagem: "Cadastrado com sucesso"});
-      console.log(novoCliente);
+      setMensagem({
+        status: true,
+        tipo: "sucesso",
+        mensagem: "Cadastrado com sucesso",
+      });
+      const resposta = await axios
+        .post(`http://localhost:8080/cliente`, {
+          nome: novoCliente.nome,
+          cpf: novoCliente.cpf,
+          genero: novoCliente.genero,
+          telefone: novoCliente.telefone,
+          email: novoCliente.email,
+          senha: novoCliente.senha,
+        })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+        });
+      // await fetch("http://localhost:8080/cliente", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     cliente,
+      //   }),
+      // })
+      //   .then((response) => {
+      //     console.log("response", response);
+      //     return response.json();
+      //   })
+      //   .then((json) => {
+      //     console.log("json", json);
+      //     return json;
+      //   });
+      // console.log("cliente ->>>", cliente);
+
+      // console.log(novoCliente);
       // navegacao("/conta/pedidos");
     } else {
-      setMensagem({status: true, tipo: "erro", mensagem: "Verifique se todos os dados estão corretos"});
+      setMensagem({
+        status: true,
+        tipo: "erro",
+        mensagem: "Verifique se todos os dados estão corretos",
+      });
       console.log("Não enviar");
     }
   }
@@ -275,10 +315,7 @@ const Cadastro = () => {
                   onChange={({ target }) => setTipoDeLogradouro(target.value)}
                 >
                   {tiposLogradouro.map((tipo, index) => (
-                    <option
-                      value={tipo}
-                      key={index}
-                    >
+                    <option value={tipo} key={index}>
                       {tipo}
                     </option>
                   ))}
@@ -296,7 +333,7 @@ const Cadastro = () => {
                   onChange={({ target }) => setEstado(target.value)}
                 >
                   {estados.map((e, index) => (
-                    <option value={e} key={index} >
+                    <option value={e} key={index}>
                       {e}
                     </option>
                   ))}
@@ -313,9 +350,7 @@ const Cadastro = () => {
                   className="form-control"
                   onChange={({ target }) => setPais(target.value)}
                 >
-                  <option value="Brasil" >
-                    Brasil
-                  </option>
+                  <option value="Brasil">Brasil</option>
                 </select>
               </div>
             </div>
@@ -333,10 +368,7 @@ const Cadastro = () => {
                   onChange={({ target }) => setTipoDeEndereco(target.value)}
                 >
                   {TIPOS_DE_ENDERECO.map((tipo, index) => (
-                    <option
-                      value={tipo}
-                      key={index}
-                    >
+                    <option value={tipo} key={index}>
                       {tipo}
                     </option>
                   ))}
