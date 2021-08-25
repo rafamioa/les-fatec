@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name="clientes")
-public class Cliente implements Serializable{
+public class Cliente  extends EntidadeDominio implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -23,7 +23,17 @@ public class Cliente implements Serializable{
 	private String email;
 	private String senha;
 	
-//	public Long getId() {
+	public Cliente() {}
+	
+	public Cliente(String nome, String cpf, String genero, String telefone, String email, String senha) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.genero = genero;
+		this.telefone = telefone;
+		this.email = email;
+		this.senha = senha;
+	}
+	//	public Long getId() {
 //		return id;
 //	}
 //	public void setId(Long id) {

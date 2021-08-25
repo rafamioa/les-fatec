@@ -12,9 +12,9 @@ public class ClienteService {
 	@Autowired
 	private ClienteDAO dao; 
 	
-	public Cliente salvar(Cliente cliente){
-		Cliente obj = dao.save(cliente);
-		return  obj;
-	}
+//	public Cliente salvar(Cliente cliente){
+//		Cliente obj = dao.saveAll(cliente);
+//		return  obj;
+//	}
 
 }
