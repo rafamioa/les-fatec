@@ -1,8 +1,12 @@
 package br.gov.sp.fatec.APIRestJavaSpring.modelos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity(name="clientes")
 public class Cliente  extends EntidadeDominio implements Serializable{
@@ -17,6 +21,9 @@ public class Cliente  extends EntidadeDominio implements Serializable{
 	private String email;
 	private String senha;
 	
+	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
+	private List<Endereco> enderecos = new ArrayList<>();
+	
 	public Cliente() {}
 	
 	public Cliente(String nome, String cpf, String genero, String telefone, String email, String senha) {
@@ -27,12 +34,15 @@ public class Cliente  extends EntidadeDominio implements Serializable{
 		this.email = email;
 		this.senha = senha;
 	}
-	//	public Long getId() {
-//		return id;
-//	}
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
 	public String getNome() {
 		return nome;
 	}
