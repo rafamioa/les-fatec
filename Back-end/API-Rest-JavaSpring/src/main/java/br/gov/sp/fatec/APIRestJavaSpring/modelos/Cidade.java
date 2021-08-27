@@ -2,6 +2,7 @@ package br.gov.sp.fatec.APIRestJavaSpring.modelos;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -10,12 +11,12 @@ import javax.persistence.ManyToOne;
 public class Cidade extends EntidadeDominio implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+
+	private String nome;
 	
-	public String nome;
-	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="estado_id")
-	public Estado estado;
+	private Estado estado;
 	
 	public Cidade() {}
 

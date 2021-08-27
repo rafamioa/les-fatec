@@ -2,37 +2,46 @@ package br.gov.sp.fatec.APIRestJavaSpring.modelos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name="clientes")
-public class Cliente  extends EntidadeDominio implements Serializable{
+public class Cliente extends EntidadeDominio  implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	private String nome;
-//	private Date dataDeNascimento;
+	@JsonFormat(pattern="dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date dataDeNascimento;
 	private String cpf;
 	private String genero;
 	private String telefone;
 	private String email;
 	private String senha;
 	
-	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	public Cliente() {}
 	
-	public Cliente(String nome, String cpf, String genero, String telefone, String email, String senha) {
+	public Cliente(String nome, String cpf, String genero, String telefone, String email, String senha, Date dataDeNascimento) {
+		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.genero = genero;
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
+		this.dataDeNascimento = dataDeNascimento;
 	}
 
 	public List<Endereco> getEnderecos() {
@@ -49,12 +58,12 @@ public class Cliente  extends EntidadeDominio implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-//	public Date getDataDeNascimento() {
-//		return dataDeNascimento;
-//	}
-//	public void setDataDeNascimento(Date dataDeNascimento) {
-//		this.dataDeNascimento = dataDeNascimento;
-//	}
+	public Date getDataDeNascimento() {
+		return dataDeNascimento;
+	}
+	public void setDataDeNascimento(Date dataDeNascimento) {
+		this.dataDeNascimento = dataDeNascimento;
+	}
 	public String getCpf() {
 		return cpf;
 	}

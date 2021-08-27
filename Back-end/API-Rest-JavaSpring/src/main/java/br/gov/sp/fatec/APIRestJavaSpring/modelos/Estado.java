@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,13 +21,18 @@ public class Estado extends EntidadeDominio implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="estado")
-	public List<Cidade> cidades = new ArrayList<>();
+	private List<Cidade> cidades = new ArrayList<>();
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="pais_id")
+	private Pais pais;
 	
 	public Estado() {}
 
-	public Estado(String nome) {
+	public Estado(String nome, Pais pais) {
 		super();
 		this.nome = nome;
+		this.pais = pais;
 	}
 
 	public List<Cidade> getCidades() {

@@ -2,6 +2,7 @@ package br.gov.sp.fatec.APIRestJavaSpring.modelos;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -22,28 +23,51 @@ public class Endereco extends EntidadeDominio implements Serializable{
 	private String tipoResidencia;
 	private String bairro;
 	private Long numero;
+	@Column(name="endereco_de_cobranca")
+	private boolean enderecoDeEntrega;
+	@Column(name="endereco_de_entrega")
+	private boolean enderecoDeCobranca;
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 	
 	public Endereco() {}
 
 	public Endereco(String logradouro, String tipoLogradouro, String cep, String tipoResidencia, String bairro,
-			Long numero, Cliente cliente, Cidade cidade) {
+			Long numero, boolean enderecoDeEntrega, boolean enderecoDeCobranca, Cliente cliente, Cidade cidade) {
+		super();
 		this.logradouro = logradouro;
 		this.tipoLogradouro = tipoLogradouro;
 		this.cep = cep;
 		this.tipoResidencia = tipoResidencia;
 		this.bairro = bairro;
 		this.numero = numero;
+		this.enderecoDeEntrega = enderecoDeEntrega;
+		this.enderecoDeCobranca = enderecoDeCobranca;
 		this.cliente = cliente;
 		this.cidade = cidade;
+	}
+
+	public boolean isEnderecoDeEntrega() {
+		return enderecoDeEntrega;
+	}
+
+	public void setEnderecoDeEntrega(boolean enderecoDeEntrega) {
+		this.enderecoDeEntrega = enderecoDeEntrega;
+	}
+
+	public boolean isEnderecoDeCobranca() {
+		return enderecoDeCobranca;
+	}
+
+	public void setEnderecoDeCobranca(boolean enderecoDeCobranca) {
+		this.enderecoDeCobranca = enderecoDeCobranca;
 	}
 
 	public String getLogradouro() {

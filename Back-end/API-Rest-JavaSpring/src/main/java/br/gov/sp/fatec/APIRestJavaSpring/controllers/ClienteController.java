@@ -20,8 +20,8 @@ public class ClienteController {
 	private IFachada fachada;
 	
 	@PostMapping
-	public ResponseEntity<Cliente> cadastrar(@RequestBody Cliente entidade) {
+	public ResponseEntity<EntidadeDominio> cadastrar(@RequestBody Cliente entidade) {
 		EntidadeDominio resultado = fachada.salvar(entidade);
-		return ResponseEntity.ok().body((Cliente)resultado);
+		return ResponseEntity.ok().body(resultado);
 	}
 }

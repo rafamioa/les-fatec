@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.APIRestJavaSpring.services;
 
+import br.gov.sp.fatec.APIRestJavaSpring.modelos.Cliente;
 import br.gov.sp.fatec.APIRestJavaSpring.modelos.EntidadeDominio;
 
 public interface IFachada {
